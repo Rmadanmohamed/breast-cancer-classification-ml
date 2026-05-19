@@ -1,0 +1,13 @@
+{
+  "repo": "breast-cancer-classification-ml",
+  "title": "Breast Cancer Classification ML",
+  "category": "Medical-AI-Projects",
+  "description": "A supervised machine learning notebook that explores breast cancer data, preprocesses features, trains multiple classifiers, and evaluates classification quality.",
+  "topics": [
+    "machine-learning",
+    "medical-ai",
+    "classification",
+    "scikit-learn",
+    "xgboost"
+  ]
+}

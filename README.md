@@ -1,5 +1,7 @@
 # Breast Cancer Classification ML
 
+> **Phase 2 repair branch:** Set `BREAST_CANCER_DATA_DIR` to the directory containing the original `Breast_Cancer.csv`. The repair splits raw features and labels first, fits preprocessing and label encoding on training only, and trains the original classifiers on oversampled training arrays. The holdout remains unchanged. `imbalanced-learn` is now declared. No real-data metrics have been validated. The historical description below documents the pre-repair baseline; use the instructions above for the repaired notebook. Full execution and dependency resolution are pending.
+
 ## Overview and problem statement
 
 Compare supervised classifiers for the `Status` field in a breast cancer tabular dataset. This is an exploratory clinical-data modeling exercise, not a diagnostic service.

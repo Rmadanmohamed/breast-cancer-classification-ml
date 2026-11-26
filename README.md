@@ -7,8 +7,7 @@ Compare supervised classifiers for the `Status` field in a breast cancer tabular
 ## Technology stack and prerequisites
 
 - Python 3 (exact version not specified); a Python notebook environment is required.
-- Declared dependencies in [requirements.txt](requirements.txt): matplotlib, numpy, pandas, scikit-learn, seaborn, xgboost. All are unpinned.
-- Additional import not declared directly in the manifest: imbalanced-learn (version unspecified).
+- Declared dependencies in [requirements.txt](requirements.txt): matplotlib, numpy, pandas, scikit-learn, seaborn, xgboost, imbalanced-learn. All are unpinned.
 - Google Colab or local Jupyter; local Jupyter must be installed separately. No GPU or external service is explicitly required.
 
 ## Project structure
@@ -19,11 +18,11 @@ Compare supervised classifiers for the `Status` field in a breast cancer tabular
 
 ## Dataset and preprocessing
 
-`Breast_Cancer.csv` at `/content/Breast_Cancer.csv`; source and data license are unspecified. The target is `Status`; remaining columns are predictors. The notebook label-encodes object columns and constructs an oversampled copy, but the actual 80/20 split uses the original features and labels (seed 22).
+`Breast_Cancer.csv` at `/content/Breast_Cancer.csv`; source and data license are unspecified. The target is `Status`; remaining columns are predictors. The notebook makes a stratified 80/20 split (seed 22), fits imputation, scaling and encoding on training only, and transforms the untouched holdout.
 
 ## Model and workflow
 
-Logistic regression, random forest, gradient boosting, decision tree, KNN, Gaussian naive Bayes and SVC are fitted and evaluated by `pred(model)`. XGBoost is instantiated but not evaluated in the saved cells. `RandomOverSampler` uses seed 41; its outputs are not used for fitting.
+Logistic regression, random forest, gradient boosting, decision tree, KNN, Gaussian naive Bayes and SVC are fitted and evaluated by `pred(model)`. XGBoost is instantiated but not evaluated in the saved cells. `RandomOverSampler` uses seed 41; its outputs are used exclusively to fit classifiers; the holdout is never resampled.
 
 ## Installation and execution
 
@@ -39,7 +38,7 @@ Activate the environment on Linux/macOS with `source .venv/bin/activate`, or on 
 
 ```bash
 python -m pip install -r requirements.txt
-python -m pip install jupyter imbalanced-learn
+python -m pip install jupyter
 jupyter notebook notebooks/breast-cancer-classification.ipynb
 ```
 
@@ -63,10 +62,14 @@ No standalone screenshot or verified live demo is included in the repository. An
 
 ## Limitations and next steps
 
-Categorical encoding is fitted before splitting; oversampling is unused; no independent clinical validation, calibration or external test cohort is provided. Not a substitute for professional medical diagnosis. Add a dataset citation, leakage-safe preprocessing, cross-validation and model export.
+Training-only preprocessing and resampling are implemented on the repair branch, but no independent clinical validation, calibration or external test cohort is provided. Not a substitute for professional medical diagnosis. Add a dataset citation, cross-validation and model export.
 
 ## Author
 
 **Ramadan Mohamed Hassan** — AI Engineer | AI Researcher | AI Automation | LLM & RAG Systems | Machine Learning
 
 [Portfolio](https://ramadan-ai-portfolio.vercel.app/) · [LinkedIn](https://www.linkedin.com/in/ramadan-mohamed-89085a366/) · [GitHub](https://github.com/Rmadanmohamed) · [Email](mailto:ramadanmohameddd3@gmail.com)
+
+## Repair-branch validation status
+
+The changed notebook was statically inspected and saved on a review branch. Original datasets are unavailable to this audit, and no notebook training, test scores, dependency resolution or end-to-end execution is claimed. Dependency versions remain unpinned until a compatible environment can be verified.
